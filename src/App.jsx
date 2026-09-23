@@ -163,7 +163,7 @@ export default function Portfolio() {
                 transition={{ delay: 0.4 }}
               >
                 <a href="#projects" className="btn btn-primary">View Projects</a>
-                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">Download CV</a>
+                <a href="/resume.html" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">Download CV</a>
               </motion.div>
             </div>
 
@@ -397,7 +397,7 @@ export default function Portfolio() {
               <a href="https://github.com/zjesiut" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="GitHub"><GithubIcon /></a>
               <a href="#" className="social-link" aria-label="LinkedIn"><LinkedInIcon /></a>
               <a href="mailto:setemelese91@gmail.com" className="social-link" aria-label="Email"><MailIcon /></a>
-              <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Resume"><UserIcon /></a>
+              <a href="/resume.html" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Resume"><UserIcon /></a>
             </motion.div>
             
             <motion.div 

@@ -21,10 +21,10 @@ If you are developing a production application, we recommend using TypeScript wi
 
 This workspace contains a personal portfolio site built with React and Framer Motion. Recent UI updates include:
 
-- Professional name/tagline update to `SETELIGN` and role `Full-Stack Engineer`.
-- Improved profile photo controls (overlay + circular change button).
-- Added an `Experience` section to highlight internships and projects.
-- CTA updated: "View Projects" and "Download CV" (place `resume.pdf` in `public/`).
+-- Professional name/tagline update to `SETELIGN` and role `Full-Stack Engineer`.
+-- Improved profile photo controls (overlay + circular change button).
+-- Added an `Experience` section to highlight internships and projects.
+-- CTA updated: "View Projects" and "Download CV" (a web resume preview is available at `public/resume.html`; you can also add `resume.pdf` for direct download).
 
 Run locally:
 
