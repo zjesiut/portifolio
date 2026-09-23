@@ -65,7 +65,7 @@ export default function Portfolio() {
       desc: "A comprehensive platform for course management, student progress tracking, and interactive learning modules built with React and Node.js.",
       tags: ["React", "Node.js", "MongoDB", "Express"],
       github: "https://github.com/zjesiut/smart-school-",
-      link: "#",
+      link: "https://github.com/zjesiut/smart-school-",
       image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=1074&auto=format&fit=crop"
     },
     {
@@ -73,7 +73,7 @@ export default function Portfolio() {
       desc: "Full-stack movie platform with premium subscription features, Chapa payment integration, and seamless video playback.",
       tags: ["React", "Express", "Chapa API", "PostgreSQL"],
       github: "https://github.com/zjesiut/moviestream",
-      link: "#",
+      link: "https://github.com/zjesiut/moviestream",
       image: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1025&auto=format&fit=crop"
     },
     {
@@ -81,7 +81,7 @@ export default function Portfolio() {
       desc: "Institutional application for managing course enrollments, student records, and academic schedules with automated validation.",
       tags: ["React", "Firebase", "TailwindCSS"],
       github: "https://github.com/zjesiut/smart-school-",
-      link: "#",
+      link: "https://github.com/zjesiut/smart-school-",
       image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=1170&auto=format&fit=crop"
     }
   ];
@@ -394,26 +394,26 @@ export default function Portfolio() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <a href="#" className="social-link"><GithubIcon /></a>
-              <a href="#" className="social-link"><LinkedInIcon /></a>
-              <a href="#" className="social-link"><MailIcon /></a>
-              <a href="#" className="social-link"><UserIcon /></a>
+              <a href="https://github.com/zjesiut" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="GitHub"><GithubIcon /></a>
+              <a href="#" className="social-link" aria-label="LinkedIn"><LinkedInIcon /></a>
+              <a href="mailto:setemelese91@gmail.com" className="social-link" aria-label="Email"><MailIcon /></a>
+              <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Resume"><UserIcon /></a>
             </motion.div>
             
             <motion.div 
               style={{ marginTop: "3rem" }}
               {...fadeIn}
             >
-              <button className="btn btn-primary" style={{ margin: "0 auto" }}>
-                Send a Message
-              </button>
+              <a href="mailto:setemelese91@gmail.com?subject=Opportunity%20Inquiry" className="btn btn-primary" style={{ margin: "0 auto", textDecoration: 'none' }}>
+                Contact Me
+              </a>
             </motion.div>
           </div>
         </section>
       </main>
 
       <footer>
-        <p>&copy; {new Date().getFullYear()} Setegn. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Setelign. All rights reserved. — <a href="mailto:setemelese91@gmail.com">setemelese91@gmail.com</a></p>
         <p style={{ marginTop: "0.5rem" }}>Built with React & Framer Motion</p>
       </footer>
     </div>
