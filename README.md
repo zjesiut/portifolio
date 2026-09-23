@@ -14,3 +14,23 @@ The React Compiler is not enabled on this template because of its impact on dev 
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+---
+
+## Portfolio Notes
+
+This workspace contains a personal portfolio site built with React and Framer Motion. Recent UI updates include:
+
+- Professional name/tagline update to `SETELIGN` and role `Full-Stack Engineer`.
+- Improved profile photo controls (overlay + circular change button).
+- Added an `Experience` section to highlight internships and projects.
+- CTA updated: "View Projects" and "Download CV" (place `resume.pdf` in `public/`).
+
+Run locally:
+
+```bash
+npm install
+npm run dev
+```
+
+To publish, deploy to Vercel/Netlify or enable GitHub Pages for `https://github.com/zjesiut/portifolio`.

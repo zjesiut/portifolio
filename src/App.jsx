@@ -111,6 +111,7 @@ export default function Portfolio() {
           className="nav-logo"
         >
           <h2 style={{ fontWeight: 800, letterSpacing: "-1px" }}>SETELIGN.</h2>
+          <div className="nav-subtitle">Full-Stack Engineer • ML Enthusiast</div>
         </motion.div>
         
         <div className="nav-links">
@@ -161,8 +162,8 @@ export default function Portfolio() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
               >
-                <button className="btn btn-primary">View Projects</button>
-                <button className="btn btn-secondary">Download CV</button>
+                <a href="#projects" className="btn btn-primary">View Projects</a>
+                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">Download CV</a>
               </motion.div>
             </div>
 
@@ -222,6 +223,28 @@ export default function Portfolio() {
                 <p>{skill.desc}</p>
               </motion.div>
             ))}
+          </div>
+        </section>
+
+        {/* Experience Section */}
+        <section id="experience" className="experience-section">
+          <div className="section-header">
+            <motion.h2 {...fadeIn}>Experience</motion.h2>
+            <motion.p {...fadeIn} transition={{ delay: 0.1 }}>Relevant internships and projects</motion.p>
+          </div>
+
+          <div className="experience-timeline">
+            <div className="experience-item">
+              <h3>Software Engineering Intern — Acme Corp</h3>
+              <span className="muted">Jun 2025 — Aug 2025</span>
+              <p>Worked on a React + Node.js feature to improve onboarding flows, adding analytics and accessibility enhancements.</p>
+            </div>
+
+            <div className="experience-item">
+              <h3>Machine Learning Research Intern — Uni Lab</h3>
+              <span className="muted">Jan 2024 — May 2024</span>
+              <p>Built and deployed a classification model for document extraction; integrated the model into a Flask API.</p>
+            </div>
           </div>
         </section>
 
