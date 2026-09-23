@@ -143,6 +143,33 @@
   opacity: 1;
 }
 
+/* Small circular photo button (persistent) */
+.upload-button {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  box-shadow: 0 8px 20px rgba(16,24,40,0.12);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
+  z-index: 5;
+}
+
+.upload-button:hover {
+  transform: translateY(-3px);
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
 .hero-tag {
   display: inline-block;
   padding: 0.5rem 1rem;

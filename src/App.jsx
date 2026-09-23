@@ -110,7 +110,7 @@ export default function Portfolio() {
           animate={{ opacity: 1, x: 0 }}
           className="nav-logo"
         >
-          <h2 style={{ fontWeight: 800, letterSpacing: "-1px" }}>SETEGN.</h2>
+          <h2 style={{ fontWeight: 800, letterSpacing: "-1px" }}>SETELIGN.</h2>
         </motion.div>
         
         <div className="nav-links">
@@ -151,7 +151,7 @@ export default function Portfolio() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
               >
-                Hi, I'm Setegn. I specialize in crafting professional full-stack applications 
+                Hi, I'm Setelign. I specialize in crafting professional full-stack applications 
                 and integrating advanced Machine Learning models into production environments.
               </motion.p>
               
@@ -182,7 +182,10 @@ export default function Portfolio() {
                 )}
                 <label htmlFor="profile-upload" className="upload-overlay">
                   <CameraIcon size={24} />
-                  <span>Update Photo</span>
+                  <span>Change Photo</span>
+                </label>
+                <label htmlFor="profile-upload" className="upload-button" aria-label="Change profile photo">
+                  <CameraIcon size={18} />
                 </label>
                 <input 
                   type="file" 
