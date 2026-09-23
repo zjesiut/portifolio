@@ -52,11 +52,13 @@ import {
   LinkedInIcon,
   TwitterIcon,
   TelegramIcon,
+  FacebookIcon,
   MailIcon,
   PhoneIcon,
   MapPinIcon,
   TechIcon
 } from "./icons";
+
 
 // Personal Info
 const profile = {
@@ -74,11 +76,12 @@ const profile = {
   location: "Durame, Ethiopia",
   university: "Wachemo University",
   email: "setemelese91@gmail.com",
-  phone: "+251 938 543 853",
-  clientSupport: "+251 938 543 853",
+  phone: "+251 942 358 217",
+  clientSupport: "+251 942 358 217",
   github: "https://github.com/zjesiut",
   linkedin: "https://linkedin.com/in/setelign-melese",
-  telegram: "https://t.me/zjesiut",
+  facebook: "https://www.facebook.com/profile.php?id=100030820490907",
+  telegram: "https://t.me/Ma_mi777",
   twitter: "https://x.com/zjesiut",
   cvUrl: "/resume.html",
   portraitUrl: "/profile.jpg",
@@ -98,6 +101,7 @@ const navItems = [
 const socialLinks = [
   { name: "GitHub", url: profile.github, icon: "github" },
   { name: "LinkedIn", url: profile.linkedin, icon: "linkedin" },
+  { name: "Facebook", url: profile.facebook, icon: "facebook" },
   { name: "Telegram", url: profile.telegram, icon: "telegram" },
   { name: "Twitter", url: profile.twitter, icon: "twitter" },
   { name: "Email", url: `mailto:${profile.email}`, icon: "mail" }
@@ -637,6 +641,7 @@ export default function Portfolio() {
       case "linkedin": return LinkedInIcon;
       case "twitter": return TwitterIcon;
       case "telegram": return TelegramIcon;
+      case "facebook": return FacebookIcon;
       case "mail": return MailIcon;
       default: return GlobeIcon;
     }

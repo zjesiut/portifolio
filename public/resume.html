@@ -3,88 +3,705 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Setelign — Resume</title>
+  <title>Setelign Melese — CV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
-    :root{--bg:#ffffff;--text:#0f172a;--muted:#475569;--accent:#6366f1}
-    body{font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:var(--bg); color:var(--text); padding:32px;}
-    .container{max-width:800px;margin:0 auto;padding:28px;border:1px solid #e6e9ef;border-radius:10px}
-    header{display:flex;justify-content:space-between;align-items:center}
-    h1{margin:0;font-size:1.8rem}
-    .muted{color:var(--muted)}
-    .contact{display:flex;gap:16px;align-items:center}
-    .section{margin-top:20px}
-    h2{font-size:1rem;margin-bottom:8px;color:var(--accent)}
-    ul{margin:0;padding-left:20px}
-    .skills{display:flex;flex-wrap:wrap;gap:8px}
-    .skill{background:#f1f2ff;color:var(--accent);padding:6px 10px;border-radius:999px;font-weight:600;font-size:0.85rem}
-    .download{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;background:var(--accent);color:white;border-radius:8px;text-decoration:none}
-    @media print{ .download, .no-print { display:none !important } }
+    /* ─── Reset ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ─── Variables ──────────────────────────────── */
+    :root {
+      --bg: #ffffff;
+      --surface: #f8fafc;
+      --border: #e2e8f0;
+      --text: #0f172a;
+      --muted: #64748b;
+      --light: #94a3b8;
+      --accent: #0ea5e9;
+      --accent-dark: #0369a1;
+      --accent-bg: #f0f9ff;
+      --green: #10b981;
+      --green-bg: #ecfdf5;
+      --page-width: 800px;
+    }
+
+    /* ─── Base ───────────────────────────────────── */
+    html { font-size: 14px; }
+    body {
+      font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+      background: #e5e7eb;
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── Print button bar ───────────────────────── */
+    .print-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #1e293b;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    }
+    .print-bar span {
+      color: #94a3b8;
+      font-size: 0.8rem;
+    }
+    .print-bar-actions { display: flex; gap: 10px; }
+    .btn-print {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 18px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.825rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+    .btn-print:hover { background: var(--accent-dark); }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #334155;
+      color: #94a3b8;
+    }
+    .btn-outline:hover { border-color: #64748b; color: #e2e8f0; }
+
+    /* ─── Page wrapper ───────────────────────────── */
+    .page-wrap {
+      max-width: var(--page-width);
+      margin: 28px auto;
+      background: var(--bg);
+      border-radius: 10px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.14);
+      overflow: hidden;
+    }
+
+    /* ─── Header / Hero ─────────────────────────── */
+    .cv-header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0c2340 100%);
+      color: #fff;
+      padding: 36px 40px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cv-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 80% 50%, rgba(14,165,233,0.18) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .cv-header-inner {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      position: relative;
+    }
+    .cv-name { font-size: 2rem; font-weight: 800; letter-spacing: -0.5px; color: #f8fafc; }
+    .cv-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--accent);
+      margin-top: 4px;
+      letter-spacing: 0.3px;
+    }
+    .cv-tagline {
+      margin-top: 10px;
+      font-size: 0.82rem;
+      color: #94a3b8;
+      max-width: 420px;
+      line-height: 1.5;
+    }
+    .cv-header-contact {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .cv-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: #cbd5e1;
+      text-decoration: none;
+    }
+    .cv-contact-item:hover { color: var(--accent); }
+    .cv-contact-item svg { opacity: 0.7; flex-shrink: 0; }
+    .cv-divider {
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent) 0%, #38bdf8 50%, transparent 100%);
+    }
+
+    /* ─── Two-column body ────────────────────────── */
+    .cv-body {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+    }
+
+    /* ─── Sidebar ────────────────────────────────── */
+    .cv-sidebar {
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      padding: 28px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    /* ─── Main content ───────────────────────────── */
+    .cv-main {
+      padding: 28px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    /* ─── Section heading ────────────────────────── */
+    .section-title {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--accent-bg);
+    }
+
+    /* ─── Sidebar Skills ─────────────────────────── */
+    .skill-group { margin-bottom: 10px; }
+    .skill-group-title {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+    .skill-tag {
+      font-size: 0.72rem;
+      font-weight: 500;
+      padding: 3px 9px;
+      border-radius: 99px;
+      background: var(--accent-bg);
+      color: var(--accent-dark);
+      border: 1px solid rgba(14,165,233,0.2);
+    }
+
+    /* ─── Sidebar social links ───────────────────── */
+    .social-list { display: flex; flex-direction: column; gap: 7px; }
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.76rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+      word-break: break-all;
+    }
+    .social-link:hover { color: var(--accent-dark); }
+    .social-link svg { flex-shrink: 0; opacity: 0.65; }
+
+    /* ─── Sidebar languages / interests ─────────────── */
+    .list-plain { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+    .list-plain li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--text);
+    }
+    .list-plain li .lang-level {
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    /* ─── Timeline entries ───────────────────────── */
+    .timeline { display: flex; flex-direction: column; gap: 20px; }
+    .timeline-item { display: flex; gap: 14px; }
+    .timeline-dot-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      padding-top: 4px;
+    }
+    .timeline-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      box-shadow: 0 0 0 3px var(--accent-bg);
+    }
+    .timeline-line {
+      flex: 1;
+      width: 2px;
+      background: var(--border);
+      margin-top: 4px;
+      min-height: 20px;
+    }
+    .timeline-content { flex: 1; }
+    .timeline-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .timeline-title { font-size: 0.88rem; font-weight: 700; color: var(--text); line-height: 1.3; }
+    .timeline-badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 99px;
+      background: var(--green-bg);
+      color: var(--green);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .timeline-org {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--accent-dark);
+      margin-top: 2px;
+    }
+    .timeline-date {
+      font-size: 0.72rem;
+      color: var(--light);
+      margin-top: 2px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .timeline-desc {
+      margin-top: 8px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .timeline-bullets {
+      margin-top: 6px;
+      padding-left: 14px;
+      font-size: 0.77rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .timeline-bullets li { margin-bottom: 3px; }
+
+    /* ─── Project Cards ──────────────────────────── */
+    .projects-list { display: flex; flex-direction: column; gap: 16px; }
+    .project-card {
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      border-left: 3px solid var(--accent);
+    }
+    .project-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .project-name { font-size: 0.86rem; font-weight: 700; color: var(--text); }
+    .project-type {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 2px 9px;
+      border-radius: 99px;
+      background: var(--accent-bg);
+      color: var(--accent-dark);
+    }
+    .project-tech {
+      margin-top: 4px;
+      font-size: 0.71rem;
+      color: var(--light);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .project-desc {
+      margin-top: 7px;
+      font-size: 0.77rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 6px;
+      font-size: 0.73rem;
+      font-weight: 600;
+      color: var(--accent-dark);
+      text-decoration: none;
+    }
+    .project-link:hover { text-decoration: underline; }
+
+    /* ─── Summary box ────────────────────────────── */
+    .summary-box {
+      padding: 14px 16px;
+      background: var(--accent-bg);
+      border-radius: 8px;
+      border-left: 3px solid var(--accent);
+      font-size: 0.81rem;
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    /* ─── Footer ─────────────────────────────────── */
+    .cv-footer {
+      padding: 14px 40px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      color: var(--light);
+    }
+    .cv-footer a { color: var(--accent-dark); text-decoration: none; }
+
+    /* ─── Print styles ───────────────────────────── */
+    @media print {
+      body { background: #fff; }
+      .print-bar { display: none !important; }
+      .page-wrap {
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+        max-width: 100%;
+      }
+      .cv-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .cv-footer { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .project-card { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .summary-box { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+
+    @media (max-width: 640px) {
+      .cv-body { grid-template-columns: 1fr; }
+      .cv-sidebar { border-right: none; border-bottom: 1px solid var(--border); }
+      .cv-header-inner { flex-direction: column; }
+      .cv-header-contact { align-items: flex-start; }
+      .print-bar-actions .btn-outline { display: none; }
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div>
-        <h1>Setelign</h1>
-        <div class="muted">Full-Stack Engineer • Machine Learning Enthusiast</div>
-      </div>
-      <div class="contact no-print">
-        <a class="download" href="#" onclick="window.print();return false;">📄 Download as PDF</a>
-      </div>
-    </header>
 
-    <section class="section">
-      <h2>Contact</h2>
-      <p class="muted">Email: <a href="mailto:setemelese91@gmail.com">setemelese91@gmail.com</a> • GitHub: <a href="https://github.com/zjesiut">github.com/zjesiut</a></p>
-    </section>
-
-    <section class="section">
-      <h2>Summary</h2>
-      <p>Professional full‑stack developer experienced building production web applications with React, Node.js, and integrating machine learning models into services. Seeking an internship or junior role to apply engineering and ML skills in impactful projects.</p>
-    </section>
-
-    <section class="section">
-      <h2>Experience</h2>
-      <div>
-        <strong>Software Engineering Intern — Acme Corp</strong>
-        <div class="muted">Jun 2025 — Aug 2025</div>
-        <p>Implemented onboarding features in a React + Node.js app; improved accessibility, added analytics, and reduced load time by optimizing data fetching.</p>
-      </div>
-      <div style="margin-top:12px">
-        <strong>Machine Learning Research Intern — Uni Lab</strong>
-        <div class="muted">Jan 2024 — May 2024</div>
-        <p>Built a document classification pipeline and deployed it as a REST API; collaborated with product stakeholders to integrate model output into workflows.</p>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>Selected Projects</h2>
-      <ul>
-        <li><strong>Online Learning System</strong> — Full-stack platform for course management (React, Node.js, MongoDB).</li>
-        <li><strong>Movie Streaming Website</strong> — End-to-end streaming platform with payments and subscriptions.</li>
-        <li><strong>Course Registration System</strong> — Institutional app with automated validation and Firebase integration.</li>
-      </ul>
-    </section>
-
-    <section class="section">
-      <h2>Skills</h2>
-      <div class="skills">
-        <span class="skill">React</span>
-        <span class="skill">Node.js</span>
-        <span class="skill">Express</span>
-        <span class="skill">MongoDB</span>
-        <span class="skill">Python</span>
-        <span class="skill">Machine Learning</span>
-        <span class="skill">Docker</span>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>Education</h2>
-      <p class="muted">B.Sc. in Software Engineering — Wachemo University — 4th year, 2nd semester</p>
-    </section>
-
-    <footer style="margin-top:20px" class="muted">Available for internships • References available on request</footer>
+  <!-- ── Top Print Bar ── -->
+  <div class="print-bar no-print">
+    <span>Setelign Melese — Curriculum Vitae</span>
+    <div class="print-bar-actions">
+      <a href="/" class="btn-print btn-outline">← Back to Portfolio</a>
+      <button class="btn-print" onclick="window.print()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/>
+        </svg>
+        Print / Save PDF
+      </button>
+    </div>
   </div>
+
+  <!-- ── CV Document ── -->
+  <div class="page-wrap">
+
+    <!-- Header -->
+    <div class="cv-header">
+      <div class="cv-header-inner">
+        <div>
+          <div class="cv-name">Setelign Melese</div>
+          <div class="cv-title">Full-Stack Engineer &amp; Machine Learning Enthusiast</div>
+          <div class="cv-tagline">Building modern, scalable web applications and intelligent systems that solve real-world problems. Passionate about clean architecture and user-centric design.</div>
+        </div>
+        <div class="cv-header-contact">
+          <a href="mailto:setemelese91@gmail.com" class="cv-contact-item">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+            setemelese91@gmail.com
+          </a>
+          <a href="tel:+251942358217" class="cv-contact-item">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
+            +251 942 358 217
+          </a>
+          <span class="cv-contact-item">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+            Durame, Ethiopia
+          </span>
+          <a href="https://github.com/zjesiut" target="_blank" rel="noopener" class="cv-contact-item">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            github.com/zjesiut
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="cv-divider"></div>
+
+    <!-- Body: Sidebar + Main -->
+    <div class="cv-body">
+
+      <!-- ── Sidebar ── -->
+      <aside class="cv-sidebar">
+
+        <!-- Skills -->
+        <div>
+          <div class="section-title">Technical Skills</div>
+          <div class="skill-group">
+            <div class="skill-group-title">Frontend</div>
+            <div class="skill-tags">
+              <span class="skill-tag">React.js</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">TypeScript</span>
+              <span class="skill-tag">HTML5</span>
+              <span class="skill-tag">CSS3</span>
+              <span class="skill-tag">Tailwind CSS</span>
+            </div>
+          </div>
+          <div class="skill-group" style="margin-top:10px">
+            <div class="skill-group-title">Backend</div>
+            <div class="skill-tags">
+              <span class="skill-tag">Node.js</span>
+              <span class="skill-tag">Express.js</span>
+              <span class="skill-tag">REST APIs</span>
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">FastAPI</span>
+            </div>
+          </div>
+          <div class="skill-group" style="margin-top:10px">
+            <div class="skill-group-title">Databases</div>
+            <div class="skill-tags">
+              <span class="skill-tag">MongoDB</span>
+              <span class="skill-tag">MySQL</span>
+              <span class="skill-tag">Firebase</span>
+            </div>
+          </div>
+          <div class="skill-group" style="margin-top:10px">
+            <div class="skill-group-title">ML / AI</div>
+            <div class="skill-tags">
+              <span class="skill-tag">scikit-learn</span>
+              <span class="skill-tag">TensorFlow</span>
+              <span class="skill-tag">Pandas</span>
+              <span class="skill-tag">NumPy</span>
+            </div>
+          </div>
+          <div class="skill-group" style="margin-top:10px">
+            <div class="skill-group-title">Tools &amp; DevOps</div>
+            <div class="skill-tags">
+              <span class="skill-tag">Git</span>
+              <span class="skill-tag">GitHub</span>
+              <span class="skill-tag">Docker</span>
+              <span class="skill-tag">Vite</span>
+              <span class="skill-tag">Figma</span>
+              <span class="skill-tag">Postman</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Connect / Social -->
+        <div>
+          <div class="section-title">Connect</div>
+          <div class="social-list">
+            <a href="https://github.com/zjesiut" target="_blank" rel="noopener" class="social-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              github.com/zjesiut
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=100030820490907" target="_blank" rel="noopener" class="social-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              Setelign Melese (Facebook)
+            </a>
+            <a href="https://t.me/Ma_mi777" target="_blank" rel="noopener" class="social-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+              @Ma_mi777 (Telegram)
+            </a>
+            <a href="mailto:setemelese91@gmail.com" class="social-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+              setemelese91@gmail.com
+            </a>
+          </div>
+        </div>
+
+        <!-- Languages -->
+        <div>
+          <div class="section-title">Languages</div>
+          <ul class="list-plain">
+            <li><span>Amharic</span><span class="lang-level">Native</span></li>
+            <li><span>English</span><span class="lang-level">Professional</span></li>
+          </ul>
+        </div>
+
+        <!-- Core Strengths -->
+        <div>
+          <div class="section-title">Core Strengths</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Problem Solving</span>
+            <span class="skill-tag">Clean Code</span>
+            <span class="skill-tag">Team Collaboration</span>
+            <span class="skill-tag">Agile / Scrum</span>
+            <span class="skill-tag">Self-Learner</span>
+            <span class="skill-tag">Communication</span>
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- ── Main Content ── -->
+      <main class="cv-main">
+
+        <!-- Professional Summary -->
+        <section>
+          <div class="section-title">Professional Summary</div>
+          <div class="summary-box">
+            Highly motivated 4th-year Software Engineering student at Wachemo University with hands-on experience in full-stack web development and machine learning integration. Proficient in building production-ready REST APIs, responsive React interfaces, and deploying ML models into real-world applications. Seeking an internship or junior engineering role to contribute to impactful projects, accelerate growth, and deliver meaningful user experiences.
+          </div>
+        </section>
+
+        <!-- Education -->
+        <section>
+          <div class="section-title">Education</div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot-col">
+                <div class="timeline-dot"></div>
+                <div class="timeline-line"></div>
+              </div>
+              <div class="timeline-content">
+                <div class="timeline-header">
+                  <div class="timeline-title">Bachelor of Science — Software Engineering</div>
+                  <div class="timeline-badge">4th Year · Active</div>
+                </div>
+                <div class="timeline-org">Wachemo University — College of Engineering &amp; Technology</div>
+                <div class="timeline-date">Sep 2022 — Present · Durame, Ethiopia</div>
+                <div class="timeline-desc">
+                  Studying advanced software engineering principles including algorithms, distributed systems, database design, software architecture, and machine learning fundamentals. Maintaining strong academic standing while developing practical projects.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Experience -->
+        <section>
+          <div class="section-title">Experience</div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot-col">
+                <div class="timeline-dot"></div>
+                <div class="timeline-line"></div>
+              </div>
+              <div class="timeline-content">
+                <div class="timeline-header">
+                  <div class="timeline-title">Full-Stack Developer — Freelance Projects</div>
+                  <div class="timeline-badge">Ongoing</div>
+                </div>
+                <div class="timeline-org">Independent / Remote</div>
+                <div class="timeline-date">Jan 2024 — Present</div>
+                <ul class="timeline-bullets">
+                  <li>Designed and developed full-stack web applications for academic and personal portfolio projects.</li>
+                  <li>Integrated RESTful APIs with React frontends and Node.js/Express backends.</li>
+                  <li>Implemented role-based authentication systems using JWT and Firebase Auth.</li>
+                  <li>Applied responsive design principles and performance optimization best practices.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot-col">
+                <div class="timeline-dot"></div>
+              </div>
+              <div class="timeline-content">
+                <div class="timeline-header">
+                  <div class="timeline-title">Machine Learning Research — University Lab</div>
+                  <div class="timeline-badge">Academic</div>
+                </div>
+                <div class="timeline-org">Wachemo University — Department of Software Engineering</div>
+                <div class="timeline-date">Jan 2024 — Jun 2024</div>
+                <ul class="timeline-bullets">
+                  <li>Built a document classification pipeline using scikit-learn and deployed it as a REST API with FastAPI.</li>
+                  <li>Preprocessed and analyzed structured datasets using Pandas and NumPy.</li>
+                  <li>Collaborated with academic stakeholders to integrate model predictions into a web dashboard.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Selected Projects -->
+        <section>
+          <div class="section-title">Selected Projects</div>
+          <div class="projects-list">
+
+            <div class="project-card">
+              <div class="project-card-header">
+                <div class="project-name">Online Learning System</div>
+                <div class="project-type">Full-Stack Platform</div>
+              </div>
+              <div class="project-tech">React · Node.js · Express · MongoDB · JWT Auth</div>
+              <div class="project-desc">
+                A comprehensive e-learning platform featuring course management, student progress tracking, quiz modules, and role-based access control for instructors and students. Implemented a RESTful API backend with secure JWT authentication and a responsive React frontend.
+              </div>
+              <a href="https://github.com/zjesiut" target="_blank" rel="noopener" class="project-link">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+                View on GitHub
+              </a>
+            </div>
+
+            <div class="project-card">
+              <div class="project-card-header">
+                <div class="project-name">Movie Streaming Website</div>
+                <div class="project-type">Web Application</div>
+              </div>
+              <div class="project-tech">React · Node.js · MongoDB · Stripe API · Video.js</div>
+              <div class="project-desc">
+                End-to-end multimedia streaming platform with genre filtering, movie search, subscription tiers, and a custom video player. Integrated Stripe for payment processing and deployed with scalable API architecture.
+              </div>
+              <a href="https://github.com/zjesiut" target="_blank" rel="noopener" class="project-link">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+                View on GitHub
+              </a>
+            </div>
+
+            <div class="project-card">
+              <div class="project-card-header">
+                <div class="project-name">Course Registration System</div>
+                <div class="project-type">Full-Stack Platform</div>
+              </div>
+              <div class="project-tech">React · Firebase · Node.js · MySQL · Role-Based Auth</div>
+              <div class="project-desc">
+                University course enrollment and scheduling portal with automated conflict detection, capacity management, and administrative dashboards. Features role-based access for students, faculty, and administrators.
+              </div>
+              <a href="https://github.com/zjesiut" target="_blank" rel="noopener" class="project-link">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+                View on GitHub
+              </a>
+            </div>
+
+          </div>
+        </section>
+
+      </main>
+    </div><!-- /.cv-body -->
+
+    <!-- Footer -->
+    <div class="cv-footer">
+      <span>Setelign Melese · Full-Stack Engineer &amp; ML Enthusiast · Wachemo University</span>
+      <span>Available for internships &amp; junior roles · References on request</span>
+    </div>
+
+  </div><!-- /.page-wrap -->
+
 </body>
 </html>
