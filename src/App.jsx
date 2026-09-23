@@ -18,6 +18,26 @@ export default function Portfolio() {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [profileImage, setProfileImage] = useState(localStorage.getItem("profileImage") || null);
   const [publicImageAvailable, setPublicImageAvailable] = useState(true);
+
+  // If there's no uploaded image in localStorage, check whether a public/profile.jpg
+  // is available on the server (deployed). If so, use it so visitors see the photo.
+  useEffect(() => {
+    if (profileImage) return; // user uploaded image takes precedence
+    const checkPublicImage = async () => {
+      try {
+        const res = await fetch('/profile.jpg', { method: 'HEAD' });
+        if (res.ok) {
+          setPublicImageAvailable(true);
+        } else {
+          setPublicImageAvailable(false);
+        }
+      } catch (e) {
+        setPublicImageAvailable(false);
+      }
+    };
+
+    checkPublicImage();
+  }, [profileImage]);
   const [githubRepos, setGithubRepos] = useState([]);
   const [loadingRepos, setLoadingRepos] = useState(true);
 
@@ -177,14 +197,12 @@ export default function Portfolio() {
               <div className="profile-image-wrapper">
                 {profileImage ? (
                   <img src={profileImage} alt="Profile" className="profile-pic" />
+                ) : publicImageAvailable ? (
+                  <img src="/profile.jpg" alt="Profile" className="profile-pic" onError={() => setPublicImageAvailable(false)} />
                 ) : (
-                  (publicImageAvailable ? (
-                    <img src="/profile.jpg" alt="Profile" className="profile-pic" onError={() => setPublicImageAvailable(false)} />
-                  ) : (
-                    <div className="profile-placeholder">
-                      <UserIcon size={80} />
-                    </div>
-                  ))
+                  <div className="profile-placeholder">
+                    <UserIcon size={80} />
+                  </div>
                 )}
                 <label htmlFor="profile-upload" className="upload-overlay">
                   <CameraIcon size={24} />
