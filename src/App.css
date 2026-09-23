@@ -19,6 +19,32 @@ body {
   margin: 0;
 }
 
+/* Logo / Navbar tweaks */
+.nav-logo h2 {
+  font-family: Manrope, Inter, system-ui;
+  font-weight: 800;
+  font-size: 1.15rem;
+  margin: 0;
+  color: var(--text);
+}
+
+.navbar {
+  background: transparent;
+  padding: 1rem 2rem;
+  box-shadow: none;
+}
+
+.nav-links .nav-link {
+  color: rgba(255,255,255,0.85);
+  padding: 0.35rem 0.4rem;
+  border-radius: 8px;
+}
+
+.nav-links .nav-link:hover {
+  background: rgba(255,255,255,0.03);
+  color: white;
+}
+
 .navbar {
   position: fixed;
   top: 0;
@@ -259,6 +285,18 @@ body {
   box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.4);
 }
 
+/* Slightly larger primary CTA and rounded */
+.btn-primary {
+  padding: 0.85rem 1.6rem;
+  border-radius: 12px;
+  letter-spacing: 0.2px;
+}
+
+.btn-secondary {
+  padding: 0.7rem 1.4rem;
+  border-radius: 12px;
+}
+
 .btn-secondary {
   background: transparent;
   color: var(--text);
@@ -272,16 +310,20 @@ body {
 /* Section Titles */
 .section-header {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 3.5rem;
 }
 
 .section-header h2 {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
+  font-family: Manrope, Inter, system-ui;
+  font-weight: 700;
+  font-size: 1.6rem;
+  text-transform: none;
+  margin: 0 0 0.5rem 0;
 }
 
 .section-header p {
   color: var(--text-muted);
+  margin: 0;
 }
 
 /* Experience styles */
@@ -380,15 +422,15 @@ body {
 
 .project-card {
   background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.03);
   overflow: hidden;
   transition: all 0.3s ease;
 }
 
 .project-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 30px 50px -20px rgba(2,6,23,0.6);
 }
 
 .project-image {
@@ -404,6 +446,17 @@ body {
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
+}
+
+.project-content h3 {
+  font-family: Manrope, Inter, system-ui;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.project-content p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
 }
 
 .project-card:hover .project-image img {
@@ -463,6 +516,10 @@ body {
   max-width: 600px;
   margin: 0 auto;
   text-align: center;
+}
+
+.contact-container .btn-primary {
+  min-width: 220px;
 }
 
 .social-bar {
