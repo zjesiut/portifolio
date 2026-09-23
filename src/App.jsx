@@ -17,6 +17,7 @@ import {
 export default function Portfolio() {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [profileImage, setProfileImage] = useState(localStorage.getItem("profileImage") || null);
+  const [publicImageAvailable, setPublicImageAvailable] = useState(true);
   const [githubRepos, setGithubRepos] = useState([]);
   const [loadingRepos, setLoadingRepos] = useState(true);
 
@@ -177,9 +178,13 @@ export default function Portfolio() {
                 {profileImage ? (
                   <img src={profileImage} alt="Profile" className="profile-pic" />
                 ) : (
-                  <div className="profile-placeholder">
-                    <UserIcon size={80} />
-                  </div>
+                  (publicImageAvailable ? (
+                    <img src="/profile.jpg" alt="Profile" className="profile-pic" onError={() => setPublicImageAvailable(false)} />
+                  ) : (
+                    <div className="profile-placeholder">
+                      <UserIcon size={80} />
+                    </div>
+                  ))
                 )}
                 <label htmlFor="profile-upload" className="upload-overlay">
                   <CameraIcon size={24} />
