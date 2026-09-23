@@ -34,3 +34,19 @@ npm run dev
 ```
 
 To publish, deploy to Vercel/Netlify or enable GitHub Pages for `https://github.com/zjesiut/portifolio`.
+
+Generate PDF resume (optional):
+
+1. Install Puppeteer locally:
+
+```bash
+npm install --save-dev puppeteer
+```
+
+2. Generate `public/resume.pdf` from the web resume:
+
+```bash
+node scripts/generate-resume.js
+```
+
+This will write `public/resume.pdf` which the site will link to. If you prefer, you can open `public/resume.html` in your browser and use Print → Save as PDF.
